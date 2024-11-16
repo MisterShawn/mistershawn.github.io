@@ -1,0 +1,13 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "Mr. Shawn",
+    "description": "",
+    "home_page_url": "https://mrshawn.net",
+    "feed_url": "https://mrshawn.net/feed.json",
+    "user_comment": "",
+    "author": {
+        "name": "Shawn"
+    },
+    "items": [
+    ]
+}
