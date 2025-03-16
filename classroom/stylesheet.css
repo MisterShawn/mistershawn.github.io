@@ -1,0 +1,230 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Noto+Color+Emoji&family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+* {
+	margin: 0;
+	padding: 0;
+	font: inherit;
+}
+li {
+	list-style-type: none;
+}
+
+/* End of Reset */
+:root {
+	--gap: 1rem;
+	--pad: 1rem;
+	
+	--fnt-lg: clamp(2rem, 8vw, 6rem);
+	--fnt-md: clamp(1.5rem, 6vw, 3rem);
+	--fnt-sm: clamp(1rem, 3vw, 1.5rem);
+
+	--bdr-w: 0.2rem;
+	--bdr-r: 1rem;
+
+	--clr-primary: 60 5;
+	--clr-red: 0 58;
+	--clr-orange: 24 75;
+	--clr-yellow: 42 100;
+	--clr-green: 100 50;
+	--clr-blue: 200 70;
+	--clr-indigo: 230 45;
+	--clr-violet: 270 70;
+	--clr-pink: 335 65;
+}
+
+body {
+	display: grid;
+	justify-content: center;
+	text-align: center;
+	color: rgb(255, 255, 255);
+	font-family: "Fredoka", sans-serif;
+	background: hsl(var(--clr-primary) 90);
+	overflow-x: hidden;
+}
+
+section {
+	display: grid;
+	align-items: end;
+	min-height: 100svh;
+	min-height: 100vh;
+	width: 100svw;
+	width: 100vw;
+	max-width: 1980px;
+}
+
+h1 {
+	color: hsl(var(--clr-primary) 20);
+	font-size: var(--fnt-lg);
+	font-weight: 600;
+	padding: var(--pad);
+}
+
+#students {
+	align-self: end;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr));
+	gap: var(--gap);
+	padding: var(--pad);
+}
+
+.student {
+	font-size: var(--fnt-md);
+	font-weight: 500;
+	text-shadow: 0 .1ch 0 hsl(0 0 0 / .5);
+	background: hsl(var(--clr-primary) 60);
+	display: grid;
+	justify-content: center;
+	align-content: center;
+	padding: calc(var(--pad) * 2) var(--pad);
+	border-radius: var(--bdr-r);
+	border: var(--bdr-w) solid hsl(0 0 0 / 0.2);
+}
+
+.student:hover {
+	cursor: pointer;
+}
+
+.student:before {
+	content: "😶";
+	font-size: 4rem;
+}
+
+.student:after {
+	color: hsl(0 0 0 / 0.9);
+	display: block;
+	font-size: var(--fnt-sm);
+	font-weight: 600;
+	font-family: "Shantell Sans", cursive;
+	text-shadow: none;
+	background: hsl(0 0 100 / 0.5);
+	padding: 0.25ch 1ch;
+	rotate: 2deg;
+	border: 0.2rem solid hsl(0 0 100 / 0.25);
+}
+
+.student:nth-child(even):after {
+	rotate: -1deg;
+}
+
+.mad {
+	background: hsl(var(--clr-red) 50);
+}
+.mad:before {
+	content: "😠";
+}
+#students li.mad:after {
+	content: "feels mad";
+}
+
+.bored {
+	background: hsl(var(--clr-orange) 50);
+}
+.bored:before {
+	content: "😒";
+}
+#students li.bored:after {
+	content: "feels bored";
+}
+
+.happy {
+	background: hsl(var(--clr-yellow) 50);
+}
+.happy:before {
+	content: "🙂";
+}
+#students li.happy:after {
+	content: "feels happy";
+}
+
+.sick {
+	background: hsl(var(--clr-green) 50);
+}
+.sick:before {
+	content: "🤮";
+}
+#students li.sick:after {
+	content: "feels sick";
+}
+
+.sad {
+	background: hsl(var(--clr-blue) 50);
+}
+.sad:before {
+	content: "😢";
+}
+#students li.sad:after {
+	content: "feels sad";
+}
+
+.tired {
+	background: hsl(var(--clr-indigo) 50);
+}
+.tired:before {
+	content: "😴";
+}
+#students li.tired:after {
+	content: "feels tired";
+}
+
+.excited {
+	background: hsl(var(--clr-violet) 50);
+}
+.excited:before {
+	content: "😃";
+}
+#students li.excited:after {
+	content: "feels excited";
+}
+
+.silly {
+	background: hsl(var(--clr-pink) 50);
+}
+.silly:before {
+	content: "😋";
+}
+#students li.silly:after {
+	content: "feels silly";
+}
+
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: hsl(var(--clr-primary) 10 / 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	display: none;
+}
+.popup {
+	background: hsl(var(--clr-primary) 90);
+	padding: var(--pad);
+	border-radius: var(--bdr-r);
+	border: var(--bdr-w) solid hsl(var(--clr-primary) 10);
+}
+
+#feelings {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr));
+	gap: var(--gap);
+	width: 50vw;
+}
+.feeling {
+	font-size: 1.5rem;
+	display: block;
+	padding: calc(var(--pad) * 2) var(--pad);
+	cursor: pointer;
+	border-radius: var(--bdr-r);
+	border: var(--bdr-w) solid rgba(0, 0, 0, 0.25);
+}
+
+.blur {
+	filter: blur(1rem);
+}
