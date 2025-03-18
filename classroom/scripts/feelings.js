@@ -5,8 +5,8 @@ const feelings = {
 	Sick: "sick",
 	Sad: "sad",
 	Tired: "tired",
-	Excited: "excited",
-	Silly: "silly"
+	Silly: "silly",
+	Hungry: "hungry"
 };
 
 const students = [
