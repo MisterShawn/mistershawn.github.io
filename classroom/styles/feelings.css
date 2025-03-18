@@ -4,6 +4,7 @@
 *::before,
 *::after {
 	box-sizing: border-box;
+	paint-order: stroke fill;
 }
 * {
 	margin: 0;
@@ -16,6 +17,8 @@ li {
 
 /* End of Reset */
 :root {
+	--max-w: 1980px;
+
 	--gap: 1.25rem;
 	--pad: 1.25rem;
 
@@ -28,7 +31,9 @@ li {
 	--bdr-w: 0.3rem;
 	--bdr-r: 1rem;
 
-	--clr-primary: 210 5;
+	--clr-primary: 169 15;
+	--clr-secondary: 169 100;
+
 	--clr-red: 0 58;
 	--clr-orange: 24 75;
 	--clr-yellow: 42 100;
@@ -45,8 +50,8 @@ body {
 	text-align: center;
 	color: rgb(255, 255, 255);
 	font-family: "Fredoka", sans-serif;
-	background: hsl(var(--clr-primary) 90);
-	overflow-x: hidden;
+	background: hsl(var(--clr-primary) 80);
+	overflow-x: clip;
 }
 
 section {
@@ -56,14 +61,20 @@ section {
 	min-height: 100vh;
 	width: 100svw;
 	width: 100vw;
-	max-width: 1980px;
+	max-width: var(--max-w);
 }
 
 h1 {
-	color: hsl(var(--clr-primary) 20);
+	font-family: "Shantell Sans", cursive;
 	font-size: var(--fnt-lg);
-	font-weight: 600;
+	font-weight: 700;
 	padding: var(--pad);
+	letter-spacing: -.1ch;
+	color: hsl(var(--clr-secondary) 50);
+	text-shadow:
+	0 .2ch 0 hsl(0 0 0),
+	0 .3ch 0 hsl(0 0 0 / .25);
+	-webkit-text-stroke: .15ch hsl(0 0 0);
 }
 
 #students {
@@ -77,11 +88,12 @@ h1 {
 .student {
 	font-size: var(--fnt-md);
 	font-weight: 500;
-	text-shadow:
-	0 0.05ch 0 hsl(0 0 0),
-	0 0.1ch 0 hsl(0 0 0),
-	0 0.15ch 0 hsl(0 0 0);
-	background: hsl(var(--clr-primary) 60);
+	background: hsl(var(--clr-primary) 60)
+		linear-gradient(
+		hsl(0 0 100 / .25) 3%,
+		hsl(0 0 100 / 0) 3%,
+		hsl(0 0 100 / 0) 95%,
+		hsl(0 0 0 / .25) 95%);
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: 1fr 1fr;
@@ -91,6 +103,7 @@ h1 {
 	padding: var(--pad) calc(var(--pad) * 2);
 	border-radius: var(--bdr-r);
 	border: var(--bdr-w) solid hsl(0 0 0);
+	-webkit-text-stroke: .25ch hsl(0 0 0);
 }
 
 .student:hover {
@@ -126,6 +139,7 @@ h1 {
 	background: hsl(0 0 100 / 0.5);
 	rotate: 2deg;
 	border: 0.2rem solid hsl(0 0 100 / 0.25);
+	-webkit-text-stroke: 0;
 }
 
 .student:nth-child(even):after {
@@ -143,7 +157,7 @@ h1 {
 }
 
 .bored {
-	background: hsl(var(--clr-orange) 50);
+	background-color: hsl(var(--clr-orange) 50);
 }
 .bored:before {
 	background:
@@ -155,7 +169,7 @@ h1 {
 }
 
 .happy {
-	background: hsl(var(--clr-yellow) 50);
+	background-color: hsl(var(--clr-yellow) 50);
 }
 .happy:before {
 	background:
@@ -167,7 +181,7 @@ h1 {
 }
 
 .sick {
-	background: hsl(var(--clr-green) 50);
+	background-color: hsl(var(--clr-green) 50);
 }
 .sick:before {
 	background:
@@ -179,7 +193,7 @@ h1 {
 }
 
 .sad {
-	background: hsl(var(--clr-blue) 50);
+	background-color: hsl(var(--clr-blue) 50);
 }
 .sad:before {
 	background:
@@ -191,7 +205,7 @@ h1 {
 }
 
 .tired {
-	background: hsl(var(--clr-indigo) 50);
+	background-color: hsl(var(--clr-indigo) 50);
 }
 .tired:before {
 	background:
@@ -203,7 +217,7 @@ h1 {
 }
 
 .silly {
-	background: hsl(var(--clr-violet) 50);
+	background-color: hsl(var(--clr-violet) 50);
 }
 .silly:before {
 	background:
@@ -215,7 +229,7 @@ h1 {
 }
 
 .hungry {
-	background: hsl(var(--clr-pink) 50);
+	background-color: hsl(var(--clr-pink) 50);
 }
 .hungry:before {
 	background:
@@ -227,30 +241,31 @@ h1 {
 }
 
 .overlay {
+	display: none;
 	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
+	grid-template-rows: 1fr auto;
 	background: hsl(var(--clr-primary) 10 / 0.5);
-	display: flex;
 	justify-content: center;
 	align-items: center;
-	display: none;
 }
 .popup {
-	position: absolute;
-	bottom: 0;
+	grid-row-start: 2;
 	background: hsl(var(--clr-primary) 10 / 0.5);
 	padding: var(--pad);
-	border-top: var(--bdr-w) solid hsl(var(--clr-primary) 10);
-	width: 100%;
+	border-top: var(--bdr-w) solid hsl(0 0 0);
+	width: 100vw;
+	overflow-x: auto;
 }
 
 #feelings {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(min(160px, 100%), 1fr));
+	display: flex;
 	gap: var(--gap);
+	max-width: var(--max-w);
+	margin: 0 auto;
 }
 
 .feeling {
@@ -259,9 +274,17 @@ h1 {
 	padding: var(--pad);
 	cursor: pointer;
 	border-radius: var(--bdr-r);
-	border: var(--bdr-w) solid rgba(0, 0, 0, 0.25);
+	border: var(--bdr-w) solid rgba(0, 0, 0);
+	height: calc(var(--icon) * 2);
+	width: calc(var(--icon) * 2);
+}
+
+.feeling:hover {
+	scale: 1.1;
+	filter: brightness(1.25);
+	border-bottom-width: calc(var(--bdr-w) * 2);
 }
 
 .blur {
-	filter: blur(1rem);
+	filter: blur(var(--pad));
 }

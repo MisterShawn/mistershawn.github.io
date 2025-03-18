@@ -34,7 +34,7 @@ students.forEach((name) => {
 	studentDiv.addEventListener("click", function () {
 		selectedStudent = studentDiv;
 		main.classList.add("blur");
-		overlay.style.display = "flex";
+		overlay.style.display = "grid";
 	});
 
 	container.appendChild(studentDiv);
