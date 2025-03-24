@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" >
 <head>
-  <meta charset="UTF-8">
-  <title>Mr.Shawn > Classroom > Feelings</title>
-  <link rel="stylesheet" href="./styles/feelings.css">
-
+	<meta charset="UTF-8">
+	<title>Mr.Shawn > Classroom > Feelings</title>
+	<link rel="stylesheet" href="./styles/feelings.css">
 </head>
 <body>
-
-<section id="main">
-	<h1>How are you feeling?</h1>
-	<ul id="students"></ul>
-</section>
-
-<div class="overlay" id="overlay">
-	<div class="popup" id="popup">
+<main>
+	<h1>
+		<span class="left">How does</span>
+		<span id="greeting">everyone</span>
+		<span class="right">feel?</span>
+	</h1>
+	
+	<section id="student-list">
+			<ul id="students"></ul>
+	</section>
+	
+	<section id="feeling-list">
 		<ul id="feelings"></ul>
-	</div>
-</div>
-
-  <script  src="./scripts/feelings.js"></script>
-
+	</section>
+</main>
+<script  src="./scripts/feelings.js"></script>
 </body>
 </html>

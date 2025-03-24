@@ -19,25 +19,27 @@ const students = [
 	"Theo",
 	"Vincent"
 ];
-const main = document.getElementById("main");
+const studentList = document.getElementById("student-list");
 const container = document.getElementById("students");
-const overlay = document.getElementById("overlay");
+const greeting = document.getElementById("greeting");
+const greetingDefault = "everyone";
+const feelingList = document.getElementById("feeling-list");
 const popup = document.getElementById("popup");
-const feelingOptions = document.getElementById("feelings");
-let selectedStudent = null;
+const feelingChoices = document.getElementById("feelings");
 
 students.forEach((name) => {
-	const studentDiv = document.createElement("li");
-	studentDiv.classList.add("student");
-	studentDiv.textContent = name;
+	const studentName = document.createElement("li");
+	studentName.classList.add("student");
+	studentName.textContent = name;
 
-	studentDiv.addEventListener("click", function () {
-		selectedStudent = studentDiv;
-		main.classList.add("blur");
-		overlay.style.display = "grid";
+	studentName.addEventListener("click", function () {
+		selectedStudent = studentName;
+		container.style.display = "none";
+		feelingList.style.display = "grid";
+		greeting.textContent = name;
 	});
 
-	container.appendChild(studentDiv);
+	container.appendChild(studentName);
 });
 
 Object.keys(feelings).forEach((feeling) => {
@@ -51,18 +53,20 @@ Object.keys(feelings).forEach((feeling) => {
 				selectedStudent.classList.remove(feelingClass);
 			});
 			selectedStudent.classList.add(feelings[feeling]);
-			main.classList.remove("blur");
-			overlay.style.display = "none";
+			feelingList.style.display = "none";
+			container.style.display = "grid";
+			greeting.textContent = greetingDefault;
 		}
 	});
 
-	feelingOptions.appendChild(button);
+	feelingChoices.appendChild(button);
 });
 
-overlay.addEventListener("click", function (event) {
-	if (!popup.contains(event.target)) {
+greeting.addEventListener("click", function (event) {
+	if (!feelingChoices.contains(event.target)) {
 		selectedStudent.setAttribute("class", "student");
-		main.classList.remove("blur");
-		overlay.style.display = "none";
+		feelingList.style.display = "none";
+		container.style.display = "grid";
+		greeting.textContent = greetingDefault;
 	}
 });

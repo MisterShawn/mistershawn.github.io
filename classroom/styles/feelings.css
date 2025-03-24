@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Noto+Emoji&family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 
 *,
 *::before,
@@ -17,135 +17,168 @@ li {
 
 /* End of Reset */
 :root {
-	--max-w: 1980px;
+	--min-w: 320px;
+	--max-w: 1920px;
 
-	--gap: 1.25rem;
-	--pad: 1.25rem;
+	--gap: 4rem;
+	--pad: 1.5rem;
+	
+	--font-sm: clamp(1.5rem, 4vw, 1.75rem);
+	--font-md: clamp(1.75rem, 6vw, 2.25rem);
+	--font-lg: clamp(2.5rem, 6vw, 2.5rem);
+	--font-xl: clamp(3.35rem, 8vw, 6.0rem);
+	--font-xxl: clamp(4.0rem, 8vw, 8.0rem);
+	
+	--icon: clamp(96px, 8vw, 128px);
 
-	--fnt-lg: clamp(2.5rem, 8vw, 6rem);
-	--fnt-md: clamp(1.75rem, 6vw, 3rem);
-	--fnt-sm: clamp(1rem, 3vw, 1.5rem);
+	--border-w: 0.25rem;
+	--border-r: 1rem;
 
-	--icon: clamp(72px, 6vw, 128px);
+	--color-primary: 175 5;
+	--color-secondary: 175 65;
 
-	--bdr-w: 0.3rem;
-	--bdr-r: 1rem;
-
-	--clr-primary: 169 15;
-	--clr-secondary: 169 100;
-
-	--clr-red: 0 58;
-	--clr-orange: 24 75;
-	--clr-yellow: 42 100;
-	--clr-green: 100 50;
-	--clr-blue: 200 70;
-	--clr-indigo: 230 45;
-	--clr-violet: 270 70;
-	--clr-pink: 335 65;
+	--color-red: 0 58;
+	--color-orange: 24 75;
+	--color-yellow: 42 100;
+	--color-green: 100 50;
+	--color-blue: 200 70;
+	--color-indigo: 230 45;
+	--color-violet: 270 70;
+	--color-pink: 335 65;
 }
 
+.left { text-align: left; margin-left: -2ch; }
+.right { text-align: right; margin-right: -2ch; }
+
+html, body { height: 100%; }
+
 body {
-	display: grid;
-	justify-content: center;
 	text-align: center;
 	color: rgb(255, 255, 255);
 	font-family: "Fredoka", sans-serif;
-	background: hsl(var(--clr-primary) 80);
-	overflow-x: clip;
+	background: hsl(var(--color-primary) 80);
 }
 
-section {
+main {
 	display: grid;
-	align-items: end;
-	min-height: 100svh;
-	min-height: 100vh;
-	width: 100svw;
-	width: 100vw;
+	grid-template-rows: 1fr min-content;
+	height: 100%;
 	max-width: var(--max-w);
+	min-width: var(--min-w);
+	margin: 0 auto;
+	padding: var(--gap);
 }
 
 h1 {
-	font-family: "Shantell Sans", cursive;
-	font-size: var(--fnt-lg);
-	font-weight: 700;
+	display: grid;
+	align-self: center;
+	justify-self: center;
 	padding: var(--pad);
-	letter-spacing: -.1ch;
-	color: hsl(var(--clr-secondary) 50);
+	padding-bottom: calc(var(--pad) * 4);
+	font-size: var(--font-xl);
+	font-weight: 600;
+	color: hsl(var(--color-secondary) 90);
 	text-shadow:
 	0 .2ch 0 hsl(0 0 0),
 	0 .3ch 0 hsl(0 0 0 / .25);
 	-webkit-text-stroke: .15ch hsl(0 0 0);
+	cursor: default;
 }
 
-#students {
+h1 #greeting {
+	line-height: 0%;
+	padding: .25ch 0 .35ch 0;
+	letter-spacing: -.15ch;
+	font-size: var(--font-xxl);
+	font-weight: 700;
+	color: hsl(var(--color-secondary) 50);
+	rotate: -5deg;
+	z-index: 99;
+}
+
+h1 #greeting, .student:after, .feeling {
+	font-family: "Shantell Sans", cursive;
+}
+
+#students, #feelings {
 	align-self: end;
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr));
 	gap: var(--gap);
-	padding: var(--pad);
 }
 
-.student {
-	font-size: var(--fnt-md);
-	font-weight: 500;
-	background: hsl(var(--clr-primary) 60)
-		linear-gradient(
-		hsl(0 0 100 / .25) 3%,
-		hsl(0 0 100 / 0) 3%,
-		hsl(0 0 100 / 0) 95%,
-		hsl(0 0 0 / .25) 95%);
+.student, .feeling {
+	--color-feeling: var(--color-primary);
 	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 1fr 1fr;
-	justify-content: center;
-	align-content: center;
-	gap: calc(var(--gap) / 2) var(--gap);
-	padding: var(--pad) calc(var(--pad) * 2);
-	border-radius: var(--bdr-r);
-	border: var(--bdr-w) solid hsl(0 0 0);
+	align-content: end;
+	position: relative;
+	font-size: var(--font-md);
+	font-weight: 500;
+	padding: calc(var(--pad) * 1.5) var(--pad);
+	background:
+	linear-gradient(
+	hsl(var(--color-feeling) 70) 3%,
+	hsl(var(--color-feeling) 50) 3%,
+	hsl(var(--color-feeling) 50) 95%,
+	hsl(var(--color-feeling) 30) 95%);
+	border-radius: var(--border-r);
+	border: var(--border-w) solid hsl(0 0 0);
+	box-shadow: 0 var(--border-w) 0 hsl(var(--color-primary) 95);
 	-webkit-text-stroke: .25ch hsl(0 0 0);
 }
 
-.student:hover {
-	cursor: pointer;
-}
-
-.student:before {
-	grid-column-start: 2;
-	grid-row-start: 1;
-	grid-row-end: span 2;
-	background:
-	center / contain no-repeat
-	url('../images/feelings/neutral.svg');
-}
-
 .student:before, .feeling:before {
+	content: "";
 	display: block;
 	min-height: var(--icon);
 	min-width: var(--icon);
-	content: "";
+	scale: .9;
+}
+
+.student:before, .feeling:before {
+	position: absolute;
+	top: calc(var(--icon) / -1.75);
+	background:
+	center / contain no-repeat
+	url('../images/feelings/neutral.svg');
+	width: 100%;
+}
+
+.student:hover, .feeling:hover {
+	cursor: pointer;
+	background:
+	linear-gradient(
+	hsl(var(--color-feeling) 90) 3%,
+	hsl(var(--color-feeling) 70) 3%,
+	hsl(var(--color-feeling) 70) 95%,
+	hsl(var(--color-feeling) 50) 95%);
+}
+
+.student:hover:before, .feeling:hover:before {
+	scale: 1;
 }
 
 .student:after {
+	content: "";
 	display: block;
+	min-height: var(--font-sm);
 	align-content: center;
-	padding: .5ch 1ch;
-	white-space: nowrap;
-	color: hsl(0 0 0 / 0.9);
-	font-size: var(--fnt-sm);
+	font-size: var(--font-sm);
 	font-weight: 600;
-	font-family: "Shantell Sans", cursive;
-	text-shadow: none;
-	background: hsl(0 0 100 / 0.5);
-	rotate: 2deg;
-	border: 0.2rem solid hsl(0 0 100 / 0.25);
-	-webkit-text-stroke: 0;
 }
 
-.student:nth-child(even):after {
-	rotate: -1deg;
+.student:after, .feeling {
+	color: hsl(var(--color-feeling) 10);
+	-webkit-text-stroke: .2ch hsl(var(--color-feeling) 90);
 }
-.mad { background-color: hsl(var(--clr-red) 50); }
+
+.student:hover:before, .feeling:hover:before {
+	color: hsl(var(--color-feeling) 40);
+}
+
+.mad {
+	--color-feeling: var(--color-red);
+	background-color: hsl(var(--color-feeling) 50);
+}
 .mad:before {
 	background:
 	center / contain no-repeat
@@ -157,7 +190,8 @@ h1 {
 }
 
 .bored {
-	background-color: hsl(var(--clr-orange) 50);
+	--color-feeling: var(--color-orange);
+	background-color: hsl(var(--color-feeling) 50);
 }
 .bored:before {
 	background:
@@ -169,7 +203,8 @@ h1 {
 }
 
 .happy {
-	background-color: hsl(var(--clr-yellow) 50);
+	--color-feeling: var(--color-yellow);
+	background-color: hsl(var(--color-feeling) 50);
 }
 .happy:before {
 	background:
@@ -181,7 +216,8 @@ h1 {
 }
 
 .sick {
-	background-color: hsl(var(--clr-green) 50);
+	--color-feeling: var(--color-green);
+	background-color: hsl(var(--color-feeling) 50);
 }
 .sick:before {
 	background:
@@ -193,7 +229,8 @@ h1 {
 }
 
 .sad {
-	background-color: hsl(var(--clr-blue) 50);
+	--color-feeling: var(--color-blue);
+	background-color: hsl(var(--color-feeling) 50);
 }
 .sad:before {
 	background:
@@ -205,7 +242,8 @@ h1 {
 }
 
 .tired {
-	background-color: hsl(var(--clr-indigo) 50);
+	--color-feeling: var(--color-indigo);
+	background-color: hsl(var(--color-feeling) 50);
 }
 .tired:before {
 	background:
@@ -217,7 +255,8 @@ h1 {
 }
 
 .silly {
-	background-color: hsl(var(--clr-violet) 50);
+	--color-feeling: var(--color-violet);
+	background-color: hsl(var(--color-feeling) 50);
 }
 .silly:before {
 	background:
@@ -229,7 +268,8 @@ h1 {
 }
 
 .hungry {
-	background-color: hsl(var(--clr-pink) 50);
+	--color-feeling: var(--color-pink);
+	background-color: hsl(var(--color-feeling) 50);
 }
 .hungry:before {
 	background:
@@ -240,51 +280,25 @@ h1 {
 	content: "feels hungry";
 }
 
-.overlay {
+#feeling-list {
 	display: none;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	grid-template-rows: 1fr auto;
-	background: hsl(var(--clr-primary) 10 / 0.5);
-	justify-content: center;
-	align-items: center;
-}
-.popup {
-	grid-row-start: 2;
-	background: hsl(var(--clr-primary) 10 / 0.5);
-	padding: var(--pad);
-	border-top: var(--bdr-w) solid hsl(0 0 0);
-	width: 100vw;
-	overflow-x: auto;
 }
 
-#feelings {
-	display: flex;
-	gap: var(--gap);
-	max-width: var(--max-w);
-	margin: 0 auto;
+@media (min-width: 800px) {
+	#students, #feelings {
+		grid-template-columns: repeat(2, 1fr);
+	}
 }
 
-.feeling {
-	font-size: var(--fnt-sm);
-	display: grid;
-	padding: var(--pad);
-	cursor: pointer;
-	border-radius: var(--bdr-r);
-	border: var(--bdr-w) solid rgba(0, 0, 0);
-	height: calc(var(--icon) * 2);
-	width: calc(var(--icon) * 2);
-}
-
-.feeling:hover {
-	scale: 1.1;
-	filter: brightness(1.25);
-	border-bottom-width: calc(var(--bdr-w) * 2);
-}
-
-.blur {
-	filter: blur(var(--pad));
+@media (min-width: 1600px) {
+	#students, #feelings {
+		grid-template-columns: repeat(4, 1fr);
+	}
+	.student, .feeling {
+		min-height: 11rem;
+		font-size: var(--font-lg);
+	}
+	.feeling {
+		align-content: center;
+	}
 }
