@@ -20,19 +20,18 @@ li {
 	--min-w: 320px;
 	--max-w: 1920px;
 
-	--gap: 4rem;
-	--pad: 1.5rem;
+	--gap: 4.0rem;
+	--pad: 2.0rem;
 	
-	--font-sm: clamp(1.5rem, 4vw, 1.75rem);
-	--font-md: clamp(1.75rem, 6vw, 2.25rem);
-	--font-lg: clamp(2.5rem, 6vw, 2.5rem);
-	--font-xl: clamp(3.35rem, 8vw, 6.0rem);
-	--font-xxl: clamp(4.0rem, 8vw, 8.0rem);
+	--font-sm: 1.5rem;
+	--font-md: 2.25rem;
+	--font-lg: 6.0rem;
+	--font-xl: 8.0rem;
 	
-	--icon: clamp(96px, 8vw, 128px);
+	--icon: 112px;
 
 	--border-w: 0.25rem;
-	--border-r: 1rem;
+	--border-r: 1.0rem;
 
 	--color-primary: 175 5;
 	--color-secondary: 175 65;
@@ -47,14 +46,11 @@ li {
 	--color-pink: 335 65;
 }
 
-.left { text-align: left; margin-left: -2ch; }
-.right { text-align: right; margin-right: -2ch; }
-
 html, body { height: 100%; }
 
 body {
 	text-align: center;
-	color: rgb(255, 255, 255);
+	color: white;
 	font-family: "Fredoka", sans-serif;
 	background: hsl(var(--color-primary) 80);
 }
@@ -75,7 +71,7 @@ h1 {
 	justify-self: center;
 	padding: var(--pad);
 	padding-bottom: calc(var(--pad) * 4);
-	font-size: var(--font-xl);
+	font-size: var(--font-lg);
 	font-weight: 600;
 	color: hsl(var(--color-secondary) 90);
 	text-shadow:
@@ -87,12 +83,12 @@ h1 {
 
 h1 #greeting {
 	line-height: 0%;
-	padding: .25ch 0 .35ch 0;
+	padding: .25ch 0 .45ch 0;
 	letter-spacing: -.15ch;
-	font-size: var(--font-xxl);
+	font-size: var(--font-xl);
 	font-weight: 700;
 	color: hsl(var(--color-secondary) 50);
-	rotate: -5deg;
+	rotate: -3deg;
 	z-index: 99;
 }
 
@@ -103,11 +99,11 @@ h1 #greeting, .student:after, .feeling {
 #students, #feelings {
 	align-self: end;
 	display: grid;
+	grid-template-columns: repeat(4, 1fr);
 	gap: var(--gap);
 }
 
 .student, .feeling {
-	--color-feeling: var(--color-primary);
 	display: grid;
 	align-content: end;
 	position: relative;
@@ -116,14 +112,14 @@ h1 #greeting, .student:after, .feeling {
 	padding: calc(var(--pad) * 1.5) var(--pad);
 	background:
 	linear-gradient(
-	hsl(var(--color-feeling) 70) 3%,
-	hsl(var(--color-feeling) 50) 3%,
-	hsl(var(--color-feeling) 50) 95%,
-	hsl(var(--color-feeling) 30) 95%);
+	hsl(0 0 100 / 40%) 3%,
+	hsl(0 0 0 / 0%) 3%,
+	hsl(0 0 0 / 0%) 95%,
+	hsl(0 0 0 / 40%) 95%);
+	background-color: hsl(var(--color-primary) 50);
 	border-radius: var(--border-r);
-	border: var(--border-w) solid hsl(0 0 0);
-	box-shadow: 0 var(--border-w) 0 hsl(var(--color-primary) 95);
-	-webkit-text-stroke: .25ch hsl(0 0 0);
+	border: var(--border-w) solid black;
+	-webkit-text-stroke: .25ch black;
 }
 
 .student:before, .feeling:before {
@@ -147,10 +143,10 @@ h1 #greeting, .student:after, .feeling {
 	cursor: pointer;
 	background:
 	linear-gradient(
-	hsl(var(--color-feeling) 90) 3%,
-	hsl(var(--color-feeling) 70) 3%,
-	hsl(var(--color-feeling) 70) 95%,
-	hsl(var(--color-feeling) 50) 95%);
+	hsl(0 0 100 / 60%) 3%,
+	hsl(0 0 100 / 20%) 3%,
+	hsl(0 0 100 / 20%) 95%,
+	hsl(0 0 0 / 20%) 95%);
 }
 
 .student:hover:before, .feeling:hover:before {
@@ -167,31 +163,24 @@ h1 #greeting, .student:after, .feeling {
 }
 
 .student:after, .feeling {
-	color: hsl(var(--color-feeling) 10);
-	-webkit-text-stroke: .2ch hsl(var(--color-feeling) 90);
+	color: black;
+	-webkit-text-stroke: .2ch white;
 }
 
-.student:hover:before, .feeling:hover:before {
-	color: hsl(var(--color-feeling) 40);
-}
-
-.mad {
-	--color-feeling: var(--color-red);
-	background-color: hsl(var(--color-feeling) 50);
+.mad,.mad:hover {
+	background-color: hsl(var(--color-red) 50);
 }
 .mad:before {
 	background:
 	center / contain no-repeat
 	url('../images/feelings/mad.svg');
 }
-
 #students li.mad:after {
 	content: "feels mad";
 }
 
-.bored {
-	--color-feeling: var(--color-orange);
-	background-color: hsl(var(--color-feeling) 50);
+.bored,.bored:hover {
+	background-color: hsl(var(--color-orange) 50);
 }
 .bored:before {
 	background:
@@ -202,9 +191,8 @@ h1 #greeting, .student:after, .feeling {
 	content: "feels bored";
 }
 
-.happy {
-	--color-feeling: var(--color-yellow);
-	background-color: hsl(var(--color-feeling) 50);
+.happy,.happy:hover {
+	background-color: hsl(var(--color-yellow) 50);
 }
 .happy:before {
 	background:
@@ -215,9 +203,8 @@ h1 #greeting, .student:after, .feeling {
 	content: "feels happy";
 }
 
-.sick {
-	--color-feeling: var(--color-green);
-	background-color: hsl(var(--color-feeling) 50);
+.sick,.sick:hover {
+	background-color: hsl(var(--color-green) 50);
 }
 .sick:before {
 	background:
@@ -228,9 +215,8 @@ h1 #greeting, .student:after, .feeling {
 	content: "feels sick";
 }
 
-.sad {
-	--color-feeling: var(--color-blue);
-	background-color: hsl(var(--color-feeling) 50);
+.sad,.sad:hover {
+	background-color: hsl(var(--color-blue) 50);
 }
 .sad:before {
 	background:
@@ -241,9 +227,8 @@ h1 #greeting, .student:after, .feeling {
 	content: "feels sad";
 }
 
-.tired {
-	--color-feeling: var(--color-indigo);
-	background-color: hsl(var(--color-feeling) 50);
+.tired,.tired:hover {
+	background-color: hsl(var(--color-indigo) 50);
 }
 .tired:before {
 	background:
@@ -254,9 +239,8 @@ h1 #greeting, .student:after, .feeling {
 	content: "feels tired";
 }
 
-.silly {
-	--color-feeling: var(--color-violet);
-	background-color: hsl(var(--color-feeling) 50);
+.silly,.silly:hover {
+	background-color: hsl(var(--color-violet) 50);
 }
 .silly:before {
 	background:
@@ -267,9 +251,8 @@ h1 #greeting, .student:after, .feeling {
 	content: "feels silly";
 }
 
-.hungry {
-	--color-feeling: var(--color-pink);
-	background-color: hsl(var(--color-feeling) 50);
+.hungry,.hungry:hover {
+	background-color: hsl(var(--color-pink) 50);
 }
 .hungry:before {
 	background:
@@ -282,23 +265,4 @@ h1 #greeting, .student:after, .feeling {
 
 #feeling-list {
 	display: none;
-}
-
-@media (min-width: 800px) {
-	#students, #feelings {
-		grid-template-columns: repeat(2, 1fr);
-	}
-}
-
-@media (min-width: 1600px) {
-	#students, #feelings {
-		grid-template-columns: repeat(4, 1fr);
-	}
-	.student, .feeling {
-		min-height: 11rem;
-		font-size: var(--font-lg);
-	}
-	.feeling {
-		align-content: center;
-	}
 }
