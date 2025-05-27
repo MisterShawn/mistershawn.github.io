@@ -1,0 +1,16 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "file": "first.md"
+    },
+    {
+      "id": 2,
+      "file": "second.md"
+    },
+		{
+			"id": 3,
+			"file": "third.md"
+		}
+  ]
+}
