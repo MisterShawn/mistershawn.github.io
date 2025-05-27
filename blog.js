@@ -1,5 +1,6 @@
 class ModernBlog {
             constructor() {
+                this.postsDir = 'https://raw.githubusercontent.com/MisterShawn/mistershawn.github.io/refs/heads/main/posts/';
                 this.posts = [];
                 this.filteredPosts = [];
                 this.currentPage = 0;
@@ -28,7 +29,7 @@ class ModernBlog {
             async loadPostsFromMarkdown() {
                 try {
                     // Load the posts index file
-                    const response = await fetch('posts/index.json');
+                    const response = await fetch(this.postsDir + 'index.json');
                     if (!response.ok) {
                         throw new Error('Failed to load posts index');
                     }
@@ -37,7 +38,7 @@ class ModernBlog {
                     // Load each markdown file
                     const loadPromises = postsIndex.posts.map(async (postInfo) => {
                         try {
-                            const postResponse = await fetch(`posts/${postInfo.file}`);
+                            const postResponse = await fetch(this.postsDir + `${postInfo.file}`);
                             if (!postResponse.ok) {
                                 throw new Error(`Failed to load post: ${postInfo.file}`);
                             }
